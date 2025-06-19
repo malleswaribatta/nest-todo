@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <h3 id="user"></h3>
+      <form action="/logout" method="POST">
+        <button>Logout</button>
+      </form>
+    </header>
+    <h1>Todo App</h1>
+    <form id="todo">
+      <input type="text" name="todo" placeholder="add todo" required />
+      <button type="submit">AddTodo</button>
+    </form>
+    <div id="todoList"></div>
+    <template id="header">
+      <div>
+        <h1></h1>
+        <button type="click" id="delete">Delete</button>
+        <form id="addTask">
+          <input type="text" name="task" placeholder="add todo" required />
+          <button type="submit">AddTask</button>
+        </form>
+      </div>
+      <!-- add tasks container -->
+    </template>
+    <template id="tasks">
+      <div>
+        <p></p>
+        <button type="click" id="done">done</button>
+        <button type="click" id="remove">Remove</button>
+      </div>
+    </template>
+  </body>
+</html>
