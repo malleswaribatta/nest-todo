@@ -1,21 +1,23 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AuthController, RemoveTaskController, TaskController, TodoController, ToggleController } from './app.controller';
+import { AuthController, TodoController } from './app.controller';
 import { AppService } from './app.service';
-import { LoggerMiddleware } from './logger.middleware';
+import { LoggerMiddleware, Login } from './logger.middleware';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
-  imports: [ServeStaticModule.forRoot({
-    rootPath: join(__dirname, '..', 'public'),
-    exclude: ['/'],
-  }),],
-  controllers: [AuthController, TodoController, TaskController, ToggleController, RemoveTaskController],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+  ],
+  controllers: [AuthController, TodoController],
   providers: [AppService],
 })
-
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    // consumer.apply(Authentication).forRoutes('/');
     consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(Login).forRoutes('/login');
   }
 }
