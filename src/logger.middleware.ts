@@ -27,12 +27,25 @@ export class Logout implements NestMiddleware {
   }
 }
 
-// @Injectable()
-// export class Authentication implements NestMiddleware {
-//   use(req: Request, res: Response, next: NextFunction) {
-//     const path = req.cookies ? '/todo' : '/login';
-//     // console.log('redirect>>', path);
-//     // res.status(303).redirect(path);
-//     next();
-//   }
-// }
+@Injectable()
+export class Authentication implements NestMiddleware {
+  use(req: Request, res: Response, next: NextFunction) {
+    console.log('inside moddleware');
+    const username = req.cookies.username;
+    // const path = req.cookies.username ? '/todo' : '/login.html';
+    // console.log(req.cookies, 'redirect>>', path);
+
+    // res.status(303).redirect(path);
+
+    if (req.path === '/login.html' && username) {
+      return res.redirect('/todo');
+    }
+
+    // If not logged in and accessing protected routes (like /todo), redirect to login
+    if (req.path === '/todo' && !username) {
+      return res.redirect('/login.html');
+    }
+
+    next();
+  }
+}

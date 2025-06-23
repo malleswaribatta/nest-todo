@@ -145,7 +145,12 @@ const handleSubmit = async (event) => {
 
 const main = async () => {
   const todoBox = document.querySelector('#todo');
+  // const userNameTag = document.querySelector('#user');
+  console.log('aaaaaaa');
+  const response = await fetch('/todo');
+  // const { username } = await response.json();
 
+  // userNameTag.innerText = username;
   fetchAndRenderTodos();
   todoBox.addEventListener('submit', handleSubmit);
 };

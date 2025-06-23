@@ -23,7 +23,13 @@ export class AuthController {
 
   @Get()
   getLogin(@Res() res: Response) {
+    console.log('----->');
     return res.sendFile(join(__dirname, '..', 'public', 'login.html'));
+  }
+
+  @Get('/start')
+  getStart(@Res() res: Response) {
+    console.log('----->');
   }
 
   private serveCookie(username: string, res: Response) {
@@ -40,12 +46,12 @@ export class AuthController {
     return this.serveCookie(username, res);
   }
 
-  @Get('/username')
-  serveUsername(@Req() req: Request, @Res() res: Response) {
-    const username = this.appService.getUsername(req);
+  // @Get('/username')
+  // serveUsername(@Req() req: Request, @Res() res: Response) {
+  //   const username = this.appService.getUsername(req);
 
-    return res.status(200).json(username);
-  }
+  //   return res.status(200).json(username);
+  // }
 
   @Post('/logout')
   serveLogout(@Res() res: Response) {
